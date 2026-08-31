@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sign Up — Azentio Finance</title>
+<link rel="stylesheet" href="css/styles.css?v=1788177009403">
+</head>
+<body>
+<div class="device">
+  <div class="screen">
+<div class="notch"></div><div class="statusbar"><span>9:41</span><div class="icons">
+  <svg class="icon-signal" viewBox="0 0 18 12" width="18" height="12" fill="currentColor"><rect x="0" y="7" width="3" height="5" rx=".5"/><rect x="5" y="5" width="3" height="7" rx=".5"/><rect x="10" y="3" width="3" height="9" rx=".5"/><rect x="15" y="0" width="3" height="12" rx=".5"/></svg>
+  <svg class="icon-battery" viewBox="0 0 25 12" width="22" height="11" fill="none"><rect x="0.5" y="0.5" width="20" height="11" rx="2.5" stroke="currentColor"/><rect x="2" y="2" width="17" height="8" rx="1" fill="currentColor"/><rect x="21.5" y="4" width="2" height="4" rx="1" fill="currentColor"/></svg>
+</div></div>
+  <div class="page ">
+    <div class="app-header"><a class="icon-btn" href="index.html" onclick="return true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7" /></svg></a><div class="title">Sign Up</div></div>
+    <div class="body">
+    <div class="stepper-wrap">
+    <div class="stepper" data-current="1" data-total="3"></div>
+    <div class="step-label"><span>Step <b>1</b> of 3</span><span>Mobile Number</span></div>
+  </div>
+    <div class="icon-circle" style="width:64px;height:64px;border-radius:20px;margin:4px auto 18px;"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" stroke="none"><path d="M6 3h4l1 5-2.5 1.5a12 12 0 0 0 6 6L16 13l5 1v4a2 2 0 0 1-2 2C10.6 20 4 13.4 4 5a2 2 0 0 1 2-2z"/></svg></div>
+    <div class="h2 center">Let's verify your number</div>
+    <div class="p center">Enter your mobile number and we'll send you a one-time code to get started.</div>
+    <form data-validate>
+      <div class="field phone-field" data-phone-field>
+    <label>Mobile number</label>
+    <div class="phone-input-row">
+      <button type="button" class="country-select" data-country-toggle aria-label="Select country code">
+        <span class="flag" data-country-flag>🇸🇦</span><span class="dial-code" data-country-code>+966</span><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+      <div class="divider"></div>
+      <input class="input phone-number-input" type="tel" inputmode="numeric" required data-mask="phone-local" data-validate="phone-local">
+    </div>
+    <div class="error-msg"></div>
+    <div class="country-dropdown" data-country-dropdown>
+      <div class="country-search"><input type="text" placeholder="Search country" data-country-search></div>
+      <div class="country-list" data-country-list></div>
+    </div>
+  </div>
+    </form></div>
+    <div class="footer"><a class="btn btn-primary" href="sign-up-otp.html" data-nav ><span class="label">Send verification code</span><span class="spinner"></span></a><a class="link-cta" href="login.html" data-nav><span>Already have an account?</span><b>Log in</b></a></div>
+    
+  </div>
+  <div class="home-indicator"></div>
+  </div>
+</div>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Estimate — Azentio Finance</title>
+<link rel="stylesheet" href="css/styles.css?v=1788177009403">
+</head>
+<body>
+<div class="device">
+  <div class="screen">
+<div class="notch"></div><div class="statusbar"><span>9:41</span><div class="icons">
+  <svg class="icon-signal" viewBox="0 0 18 12" width="18" height="12" fill="currentColor"><rect x="0" y="7" width="3" height="5" rx=".5"/><rect x="5" y="5" width="3" height="7" rx=".5"/><rect x="10" y="3" width="3" height="9" rx=".5"/><rect x="15" y="0" width="3" height="12" rx=".5"/></svg>
+  <svg class="icon-battery" viewBox="0 0 25 12" width="22" height="11" fill="none"><rect x="0.5" y="0.5" width="20" height="11" rx="2.5" stroke="currentColor"/><rect x="2" y="2" width="17" height="8" rx="1" fill="currentColor"/><rect x="21.5" y="4" width="2" height="4" rx="1" fill="currentColor"/></svg>
+</div></div>
+  <div class="page ">
+    <div class="app-header"><a class="icon-btn" href="explore-products.html" onclick="return true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7" /></svg></a><div class="title">Estimate</div></div>
+    <div class="body">
+    <div class="h3">Maximum finance amount</div>
+    <div class="big-amount" data-amount-out>SAR 12,000.00</div>
+    <div class="field">
+      <div class="sar-input-row">
+        <span class="sar-prefix"><span class="code">SAR</span></span>
+        <input class="input sar-number-input" type="text" data-amount-display readonly value="12,000.00">
+      </div>
+      <div class="hint">Drag the slider below to see how the numbers change</div>
+    </div>
+    <input type="range" min="2000" max="15000" step="500" value="12000" data-amount-range style="width:100%;margin:6px 0 4px;">
+    <div class="range-minmax"><span>SAR 2,000</span><span>SAR 15,000</span></div>
+    <div class="select-field"><label>Tenor</label><select data-tenor-select><option value="12">12 months</option><option value="24" selected>24 months</option><option value="36">36 months</option></select></div>
+    <div class="card">
+      <div class="row row-emphasis"><span class="lbl">Estimated monthly installment</span><span class="val val-lg" data-installment-out>SAR 590.00</span></div>
+      <div class="row"><span class="lbl">Estimated total contract value</span><span class="val"><span data-contract-out>SAR 14,160.00</span></span></div>
+      <div class="row"><span class="lbl">Estimated APR</span><span class="val"><span data-apr-out>17.28%</span></span></div>
+    </div>
+    <div class="hint card-hint">This is a rough estimate only. Your actual offer depends on your verified details and credit profile.</div></div>
+    <div class="footer"><a class="btn btn-primary" href="sign-up-details.html" data-nav ><span class="label">Continue to apply</span><span class="spinner"></span></a><a class="btn-link" href="explore-products.html" data-nav >Back to products</a></div>
+    
+  </div>
+  <div class="home-indicator"></div>
+  </div>
+</div>
+<script src="js/app.js"></script>
+</body>
+</html>
