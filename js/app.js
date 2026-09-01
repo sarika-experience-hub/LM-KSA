@@ -26,13 +26,19 @@ function initRipple(){
 /* ---------- page transition on internal nav links ---------- */
 function initPageTransitions(){
   document.querySelectorAll('a[data-nav], .btn[data-href], .bottom-nav a').forEach(el=>{
+    const isFlowStep = !el.closest('.bottom-nav');
     el.addEventListener('click', function(e){
       const href = this.getAttribute('href') || this.dataset.href;
       if(!href || href.startsWith('#')) return;
       e.preventDefault();
       const proceed = ()=>{
         const page = document.querySelector('.page');
-        if(page){ page.classList.add('page-exit'); }
+        if(isFlowStep){
+          sessionStorage.setItem('flow-nav-dir', 'fwd');
+          if(page){ page.classList.add('page-exit-fwd'); }
+        } else if(page){
+          page.classList.add('page-exit');
+        }
         setTimeout(()=>{ location.href = href; }, 180);
       };
       const confirmMsg = this.dataset.confirm;
@@ -43,6 +49,30 @@ function initPageTransitions(){
       }
     });
   });
+}
+
+/* ---------- directional back navigation (header back/close arrow) ---------- */
+function initFlowBackTransition(){
+  const backBtn = document.querySelector('.app-header > a.icon-btn:first-child[href]');
+  if(!backBtn || backBtn.hasAttribute('data-nav')) return;
+  backBtn.addEventListener('click', function(e){
+    const href = this.getAttribute('href');
+    if(!href || href.startsWith('#')) return;
+    e.preventDefault();
+    sessionStorage.setItem('flow-nav-dir', 'back');
+    const page = document.querySelector('.page');
+    if(page){ page.classList.add('page-exit-back'); }
+    setTimeout(()=>{ location.href = href; }, 180);
+  });
+}
+
+/* ---------- apply the matching entrance direction on load ---------- */
+function initFlowEnterTransition(){
+  const page = document.querySelector('.page');
+  const dir = sessionStorage.getItem('flow-nav-dir');
+  sessionStorage.removeItem('flow-nav-dir');
+  if(!page || !dir) return;
+  page.classList.add(dir === 'fwd' ? 'page-enter-fwd' : 'page-enter-back');
 }
 
 /* ---------- in-app confirm dialog (replaces native browser confirm()) ---------- */
@@ -535,6 +565,35 @@ function initStepper(){
   });
 }
 
+/* ---------- skeleton loaders (data-heavy screens) ---------- */
+function initSkeletonLoaders(){
+  document.querySelectorAll('[data-skeleton]').forEach(target=>{
+    const rows = Number(target.dataset.skeleton) || 3;
+    const type = target.dataset.skeletonType || 'row';
+    target.style.display = 'none';
+    const wrap = document.createElement('div');
+    wrap.className = 'sk-ph-wrap';
+    for(let i=0;i<rows;i++){
+      if(type === 'card'){
+        const c = document.createElement('div');
+        c.className = 'sk-ph-card';
+        wrap.appendChild(c);
+      } else {
+        const row = document.createElement('div');
+        row.className = 'sk-ph-row';
+        row.innerHTML = '<div class="sk-ph-circle"></div><div class="sk-ph-lines"><div class="sk-ph-line w60"></div><div class="sk-ph-line w40"></div></div>';
+        wrap.appendChild(row);
+      }
+    }
+    target.parentNode.insertBefore(wrap, target);
+    setTimeout(()=>{
+      wrap.remove();
+      target.style.display = '';
+      target.classList.add('sk-fadein');
+    }, 650);
+  });
+}
+
 /* ---------- phone field: country code picker ---------- */
 const COUNTRIES = [
   ['+93','Afghanistan','🇦🇫'],['+355','Albania','🇦🇱'],['+213','Algeria','🇩🇿'],['+1684','American Samoa','🇦🇸'],
@@ -672,7 +731,8 @@ function initDatePicker(){
 
 /* ---------- highlight active bottom-nav tab based on current file ---------- */
 function initBottomNavActive(){
-  const current = location.pathname.split('/').pop();
+  let current = location.pathname.split('/').pop();
+  if(current === 'home-new.html') current = 'home.html';
   document.querySelectorAll('.bottom-nav a').forEach(a=>{
     const href = a.getAttribute('href');
     a.classList.toggle('active', href===current);
@@ -697,6 +757,13 @@ function initAmountSync(){
   const feeOut = document.querySelector('[data-fee-out]');
   const aprOut = document.querySelector('[data-apr-out]');
   const profitPctOut = document.querySelector('[data-profitpct-out]');
+  const bbPrincipalBar = document.querySelector('[data-bb-principal]');
+  const bbProfitBar = document.querySelector('[data-bb-profit]');
+  const bbPrincipalPctOut = document.querySelector('[data-bb-principal-pct]');
+  const bbProfitPctOut = document.querySelector('[data-bb-profit-pct]');
+  const nudgeExtraOut = document.querySelector('[data-nudge-extra]');
+  const nudgeSavingsOut = document.querySelector('[data-nudge-savings]');
+  const nudgeMonthsOut = document.querySelector('[data-nudge-months]');
   if(!range || !out) return;
 
   const ANNUAL_RATE = 0.09;
@@ -712,6 +779,8 @@ function initAmountSync(){
     const monthly = contractValue / months;
     const apr = (2 * 12 * totalProfit) / (principal * (months + 1)) * 100;
     const profitPct = ANNUAL_RATE * 100;
+    const bbPrincipalPct = (principal / contractValue) * 100;
+    const bbProfitPct = (totalProfit / contractValue) * 100;
 
     out.textContent = money(principal);
     if(display) display.value = principal.toLocaleString('en-US', {minimumFractionDigits:2});
@@ -721,6 +790,20 @@ function initAmountSync(){
     if(feeOut) feeOut.textContent = money(fee);
     if(aprOut) aprOut.textContent = apr.toFixed(2) + '%';
     if(profitPctOut) profitPctOut.textContent = profitPct.toFixed(2) + '%';
+    if(bbPrincipalBar) bbPrincipalBar.style.width = bbPrincipalPct + '%';
+    if(bbProfitBar) bbProfitBar.style.width = bbProfitPct + '%';
+    if(bbPrincipalPctOut) bbPrincipalPctOut.textContent = bbPrincipalPct.toFixed(1) + '%';
+    if(bbProfitPctOut) bbProfitPctOut.textContent = bbProfitPct.toFixed(1) + '%';
+
+    if(nudgeExtraOut || nudgeSavingsOut || nudgeMonthsOut){
+      const extra = Math.round(monthly * 0.10 / 10) * 10 || 10;
+      const newMonths = Math.max(1, Math.round(contractValue / (monthly + extra)));
+      const monthsSaved = Math.max(0, months - newMonths);
+      const savings = totalProfit * (monthsSaved / months);
+      if(nudgeExtraOut) nudgeExtraOut.textContent = money(extra);
+      if(nudgeSavingsOut) nudgeSavingsOut.textContent = money(savings);
+      if(nudgeMonthsOut) nudgeMonthsOut.textContent = monthsSaved + (monthsSaved === 1 ? ' month' : ' months');
+    }
   }
 
   updateRangeFill(range);
@@ -862,8 +945,10 @@ function initLangSwitch(){
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{
+  initFlowEnterTransition();
   initRipple();
   initPageTransitions();
+  initFlowBackTransition();
   initChips();
   initCheckRows();
   initSwitches();
@@ -879,6 +964,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   initPasswordStrength();
   initPasswordToggle();
   initStepper();
+  initSkeletonLoaders();
   initDatePicker();
   initPhoneField();
   initCarousel();
