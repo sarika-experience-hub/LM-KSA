@@ -6,7 +6,7 @@ function goBack(){ history.length>1 ? history.back() : (location.href='index.htm
 
 /* ---------- ripple effect on buttons ---------- */
 function initRipple(){
-  document.querySelectorAll('.btn, .icon-btn, .keypad button, .list-item, .card.tappable').forEach(el=>{
+  document.querySelectorAll('.btn, .icon-btn, .keypad button, .list-item, .card.tappable, .product-card.tappable, .pick-item, .txn-row, .card-tile').forEach(el=>{
     el.addEventListener('click', function(e){
       const r = document.createElement('span');
       r.className='ripple';
@@ -29,6 +29,7 @@ function initPageTransitions(){
     const isFlowStep = !el.closest('.bottom-nav');
     el.addEventListener('click', function(e){
       const href = this.getAttribute('href') || this.dataset.href;
+      if(this.hasAttribute('disabled')){ e.preventDefault(); return; }
       if(!href || href.startsWith('#')) return;
       e.preventDefault();
       const proceed = ()=>{
@@ -944,6 +945,108 @@ function initLangSwitch(){
   });
 }
 
+/* ---------- card: single-select pick list (disbursement method, etc.) ---------- */
+function initPickList(){
+  document.querySelectorAll('[data-pick-group]').forEach(group=>{
+    const items = group.querySelectorAll('.pick-item');
+    items.forEach(item=>{
+      item.addEventListener('click', ()=>{
+        items.forEach(x=>x.classList.remove('on'));
+        item.classList.add('on');
+        const target = group.getAttribute('data-pick-group');
+        const cta = document.querySelector('[data-pick-cta="'+target+'"]');
+        if(cta){
+          cta.removeAttribute('disabled');
+          const href = item.getAttribute('data-pick-href');
+          if(href) cta.setAttribute('href', href);
+        }
+      });
+    });
+  });
+}
+
+/* ---------- card: balance visibility toggle ---------- */
+function initBalanceEye(){
+  document.querySelectorAll('[data-balance-eye]').forEach(btn=>{
+    const card = btn.closest('.balance-card') || document;
+    const amt = card.querySelector('[data-balance-amt]');
+    if(!amt) return;
+    const real = amt.innerHTML;
+    let shown = true;
+    btn.addEventListener('click', ()=>{
+      shown = !shown;
+      amt.innerHTML = shown ? real : '••••••';
+      card.classList.toggle('hidden-amt', !shown);
+      btn.setAttribute('aria-label', shown ? 'Hide balance' : 'Show balance');
+    });
+  });
+}
+
+/* ---------- card: copy to clipboard ---------- */
+function initCopyButtons(){
+  document.querySelectorAll('[data-copy]').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      const val = btn.getAttribute('data-copy');
+      const label = btn.getAttribute('data-copy-label') || 'Copied';
+      try{
+        await navigator.clipboard.writeText(val);
+        showToast(label + ' copied');
+      }catch(e){
+        showToast('Could not copy — long-press to select');
+      }
+    });
+  });
+}
+
+/* ---------- card: freeze toggle (card face + status pill) ---------- */
+function initCardFreeze(){
+  document.querySelectorAll('[data-freeze-toggle]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const face = document.querySelector('[data-card-face]');
+      const pill = document.querySelector('[data-card-status]');
+      const label = btn.querySelector('.qa-label') || btn;
+      const frozen = face && face.classList.toggle('frozen');
+      if(face){
+        let frost = face.querySelector('.cf-frost');
+        if(frozen && !frost){
+          frost = document.createElement('div');
+          frost.className = 'cf-frost';
+          frost.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 3v18M4.5 7.5l15 9M19.5 7.5l-15 9"/></svg><span>Frozen</span>';
+          face.appendChild(frost);
+        } else if(!frozen && frost){
+          frost.remove();
+        }
+      }
+      if(pill){
+        pill.textContent = frozen ? 'Frozen' : 'Active';
+        pill.className = frozen ? 'badge badge-warning' : 'badge badge-success';
+      }
+      if(label) label.textContent = frozen ? 'Unfreeze' : 'Freeze';
+      showToast(frozen ? 'Card frozen — no new transactions' : 'Card unfrozen');
+    });
+  });
+}
+
+/* ---------- card: reveal countdown on card-details ---------- */
+function initRevealTimer(){
+  const el = document.querySelector('[data-reveal-timer]');
+  if(!el) return;
+  let left = parseInt(el.getAttribute('data-reveal-timer'), 10) || 60;
+  const tick = ()=>{
+    el.textContent = 'Details hide in ' + left + 's';
+    if(left <= 0){
+      document.querySelectorAll('[data-secret]').forEach(s=>{
+        s.textContent = s.getAttribute('data-secret-mask') || '••••';
+      });
+      el.textContent = 'Details hidden for your security';
+      return;
+    }
+    left--;
+    setTimeout(tick, 1000);
+  };
+  tick();
+}
+
 document.addEventListener('DOMContentLoaded', ()=>{
   initFlowEnterTransition();
   initRipple();
@@ -973,5 +1076,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
   initOtherReveal();
   initAddAccount();
   initLangSwitch();
+  initPickList();
+  initBalanceEye();
+  initCopyButtons();
+  initCardFreeze();
+  initRevealTimer();
   updateContinueState();
 });
