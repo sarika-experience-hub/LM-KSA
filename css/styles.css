@@ -181,14 +181,14 @@ body{
 .btn:active{ transform:scale(.97); }
 .btn-primary{
   background:var(--primary-dark);
-  color:#fff; box-shadow:0 8px 20px rgba(22,48,61,.35);
+  color:#fff; box-shadow:0 4px 10px rgba(22,48,61,.16);
 }
-.btn-primary:active{ box-shadow:0 4px 10px rgba(22,48,61,.3); }
+.btn-primary:active{ box-shadow:0 2px 6px rgba(22,48,61,.14); }
 .btn-secondary{
   background:var(--surface); color:var(--primary-dark); border:1.5px solid var(--line); box-shadow:var(--shadow-sm);
 }
 .btn-gold{
-  background:var(--warning); color:#fff; box-shadow:0 8px 20px rgba(217,140,31,.35);
+  background:var(--warning); color:#fff; box-shadow:0 4px 10px rgba(217,140,31,.16);
 }
 .btn-outline{
   background:transparent; color:var(--primary-dark); border:1.5px solid var(--primary-dark); box-shadow:none;
@@ -214,7 +214,7 @@ body{
   animation:rippleAnim .55s var(--ease) forwards; pointer-events:none;
 }
 .btn-secondary .ripple, .btn-ghost .ripple, .product-card.tappable .ripple,
-.pick-item .ripple, .txn-row .ripple, .card-tile .ripple{ background:rgba(22,48,61,.16); }
+.pick-item .ripple, .txn-row .ripple, .card-tile .ripple, .repay-row.clickable .ripple{ background:rgba(22,48,61,.16); }
 @keyframes rippleAnim{ to{ transform:scale(2.6); opacity:0; } }
 
 /* spinner */
@@ -501,9 +501,9 @@ input[type="range"]::-moz-range-thumb{
 .product-card .btn{ padding:11px 18px; font-size:13px; transition:transform .18s var(--ease), box-shadow .18s var(--ease), background .18s var(--ease); }
 .product-card.pf .btn-primary{ background:#fff; color:var(--primary-dark); box-shadow:none; }
 .product-card .btn:hover{ transform:translateY(-2px); cursor:pointer; }
-.product-card .btn-primary:hover{ box-shadow:0 12px 26px rgba(22,48,61,.4); }
-.product-card .btn-secondary:hover{ border-color:var(--primary-dark); box-shadow:0 8px 18px rgba(22,48,61,.12); }
-.product-card.pf .btn-primary:hover{ box-shadow:0 10px 22px rgba(0,0,0,.28); }
+.product-card .btn-primary:hover{ box-shadow:0 6px 14px rgba(22,48,61,.2); }
+.product-card .btn-secondary:hover{ border-color:var(--primary-dark); box-shadow:0 4px 10px rgba(22,48,61,.10); }
+.product-card.pf .btn-primary:hover{ box-shadow:0 5px 12px rgba(0,0,0,.16); }
 
 /* Tappable product cards: all products carry equal weight — no product is
    promoted, since the whole card is the target and the screen is for browsing.
@@ -1208,3 +1208,34 @@ svg[stroke-width="3"]{ stroke-width:2.4; }
 .card-tile .ct-amt .cur{ font-size:12px; color:var(--muted); font-weight:700; margin-right:4px; }
 .card-tile .ct-meta{ font-size:11px; color:var(--muted); margin-top:3px; }
 .card-tile .chev{ color:var(--muted); flex-shrink:0; }
+
+/* ==========================================================================
+   Loan summary — stat grid + stacked bottom sheets (schedule / payment details)
+   ========================================================================== */
+.stat-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px 16px; margin:12px 0 4px; }
+.stat-cell .lbl{ display:block; font-size:11.5px; color:var(--muted); margin-bottom:3px; }
+.stat-cell .val{ display:block; font-size:14px; font-weight:700; color:var(--ink); }
+
+.sheet-panel-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:4px; }
+.sheet-panel-head .sheet-title{ margin-bottom:0; }
+
+.sheet-panel.tall{ max-height:82vh; display:flex; flex-direction:column; }
+.sheet-panel.tall .repay-table{ flex:1; min-height:0; display:flex; flex-direction:column; }
+
+.repay-table{ margin-top:6px; }
+.repay-head, .repay-row{
+  display:grid; grid-template-columns:1.3fr 1fr .9fr; align-items:center; gap:6px;
+  padding:11px 2px; border-bottom:1px solid var(--line); font-size:12.5px;
+}
+.repay-head{
+  color:var(--muted); font-weight:700; text-transform:uppercase; font-size:10px;
+  letter-spacing:.05em; border-bottom:1.5px solid var(--line); flex-shrink:0;
+}
+.repay-row{ font-weight:600; color:var(--ink); -webkit-tap-highlight-color:transparent; }
+.repay-row .badge{ justify-self:start; }
+.repay-row.clickable{ cursor:pointer; transition:opacity .15s var(--ease); position:relative; overflow:hidden; }
+.repay-row.clickable:active{ opacity:.72; }
+.repay-body{ overflow-y:auto; -webkit-overflow-scrolling:touch; flex:1; min-height:0; }
+
+.sheet-backdrop.layer2{ z-index:55; }
+.sheet-backdrop.layer2 .sheet-panel{ z-index:56; }

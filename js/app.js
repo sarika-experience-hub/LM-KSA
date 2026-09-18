@@ -6,7 +6,7 @@ function goBack(){ history.length>1 ? history.back() : (location.href='index.htm
 
 /* ---------- ripple effect on buttons ---------- */
 function initRipple(){
-  document.querySelectorAll('.btn, .icon-btn, .keypad button, .list-item, .card.tappable, .product-card.tappable, .pick-item, .txn-row, .card-tile').forEach(el=>{
+  document.querySelectorAll('.btn, .icon-btn, .keypad button, .list-item, .card.tappable, .product-card.tappable, .pick-item, .txn-row, .card-tile, .repay-row.clickable').forEach(el=>{
     el.addEventListener('click', function(e){
       const r = document.createElement('span');
       r.className='ripple';
@@ -1028,6 +1028,36 @@ function initCardFreeze(){
 }
 
 /* ---------- card: reveal countdown on card-details ---------- */
+/* ---------- generic bottom sheets: data-sheet-open="id" opens #id, data-sheet-close inside it closes it.
+   A trigger's data-pd-* attributes (e.g. data-pd-amount) are copied into the opened sheet's
+   matching [data-pd-field="amount"] elements before it opens, so one sheet template can show
+   per-row detail (used by the repayment schedule → payment details drill-down). ---------- */
+function initSheets(){
+  document.querySelectorAll('[data-sheet-open]').forEach(trigger=>{
+    trigger.addEventListener('click', function(e){
+      e.preventDefault();
+      const sheet = document.getElementById(this.getAttribute('data-sheet-open'));
+      if(!sheet) return;
+      sheet.querySelectorAll('[data-pd-field]').forEach(field=>{
+        const attr = 'data-pd-' + field.getAttribute('data-pd-field');
+        if(this.hasAttribute(attr)) field.textContent = this.getAttribute(attr);
+      });
+      sheet.classList.add('open');
+    });
+  });
+  document.querySelectorAll('.sheet-backdrop').forEach(sheet=>{
+    sheet.addEventListener('click', function(e){
+      if(e.target === this) this.classList.remove('open');
+    });
+    sheet.querySelectorAll('[data-sheet-close]').forEach(btn=>{
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        sheet.classList.remove('open');
+      });
+    });
+  });
+}
+
 function initRevealTimer(){
   const el = document.querySelector('[data-reveal-timer]');
   if(!el) return;
@@ -1081,5 +1111,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
   initCopyButtons();
   initCardFreeze();
   initRevealTimer();
+  initSheets();
   updateContinueState();
 });

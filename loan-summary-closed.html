@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Loan Summary — Azentio Finance</title>
+<link rel="stylesheet" href="css/styles.css?v=1788177009403">
+</head>
+<body>
+<div class="device">
+  <div class="screen">
+<div class="notch"></div><div class="statusbar"><span>9:41</span><div class="icons">
+  <svg class="icon-signal" viewBox="0 0 18 12" width="18" height="12" fill="currentColor"><rect x="0" y="7" width="3" height="5" rx=".5"/><rect x="5" y="5" width="3" height="7" rx=".5"/><rect x="10" y="3" width="3" height="9" rx=".5"/><rect x="15" y="0" width="3" height="12" rx=".5"/></svg>
+  <svg class="icon-battery" viewBox="0 0 25 12" width="22" height="11" fill="none"><rect x="0.5" y="0.5" width="20" height="11" rx="2.5" stroke="currentColor"/><rect x="2" y="2" width="17" height="8" rx="1" fill="currentColor"/><rect x="21.5" y="4" width="2" height="4" rx="1" fill="currentColor"/></svg>
+</div></div>
+  <div class="page ">
+    <div class="app-header"><a class="icon-btn" href="loans.html" ><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18" /></svg></a><div class="title"></div></div>
+    <div class="body">
+    <div class="h2">Loan summary</div>
+    <div class="p">Overview of loan terms and details.</div>
+
+    <div class="card">
+      <div class="row row-emphasis"><span class="lbl">Personal finance</span><span class="val"><span class="badge badge-neutral">Closed</span></span></div>
+      <div class="row"><span class="lbl">Customer number</span><span class="val">68734340247932452</span></div>
+      <div class="row"><span class="lbl">Loan account number</span><span class="val">1981008456832985901</span></div>
+      <div class="row"><span class="lbl">Date of disbursement</span><span class="val">25 Aug 2025</span></div>
+      <div class="row"><span class="lbl">Monthly instalment</span><span class="val">SAR 600.00</span></div>
+      <div class="row"><span class="lbl">Tenure</span><span class="val">24 months</span></div>
+      <div class="row"><span class="lbl">APR</span><span class="val">20.46%</span></div>
+      <div class="row"><span class="lbl">Maturity date</span><span class="val">5 Sep 2027</span></div>
+      <div class="row" style="border-bottom:none;"><span class="lbl">Disbursed amount</span><span class="val">SAR 14,400.00</span></div>
+    </div>
+    <div class="h3">Repayment schedule</div>
+    <div class="card">
+      <div class="p" style="margin:0 0 14px;">View your upcoming loan repayments with due dates and amounts.</div>
+      <a class="btn btn-secondary" href="#" data-sheet-open="repaySheet"><span class="label">View schedule ↗</span><span class="spinner"></span></a>
+    </div>
+    <a class="btn btn-secondary" href="#" data-sheet-open="moreActionsSheet" style="margin-top:14px;"><span class="label">More actions</span><span class="spinner"></span></a></div>
+    <div class="footer"><a class="btn-link" href="loans.html" data-nav >Back to my loans</a></div>
+
+  <div class="sheet-backdrop" id="moreActionsSheet">
+    <div class="sheet-panel">
+      <div class="sheet-handle"></div>
+      <div class="sheet-panel-head"><div class="sheet-title">More actions</div><button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+      <a class="list-item" href="documents.html" data-nav>
+        <div class="icon-circle"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4" fill="#fff" fill-opacity=".4"/></svg></div>
+        <div class="grow"><div class="t1">Documents</div></div>
+        <div class="chev"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></div>
+      </a>
+      <a class="list-item" href="transactions.html" data-nav>
+        <div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h11l-3-3"/><path d="M17 17H6l3 3"/></svg></div>
+        <div class="grow"><div class="t1">Transactions</div></div>
+        <div class="chev"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="sheet-backdrop" id="repaySheet">
+    <div class="sheet-panel tall">
+      <div class="sheet-handle"></div>
+      <div class="sheet-panel-head"><div class="sheet-title">Repayment schedule</div><button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+      <div class="repay-table">
+        <div class="repay-head"><span>Due date</span><span>EMI</span><span>Status</span></div>
+        <div class="repay-body">
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT250905600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Sep 2025"><span>5 Sep 2025</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT251005600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Oct 2025"><span>5 Oct 2025</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT251105600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Nov 2025"><span>5 Nov 2025</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT251205600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Dec 2025"><span>5 Dec 2025</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT260105600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Jan 2026"><span>5 Jan 2026</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT260205600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Feb 2026"><span>5 Feb 2026</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT260305600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Mar 2026"><span>5 Mar 2026</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT260405600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Apr 2026"><span>5 Apr 2026</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT260505600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 May 2026"><span>5 May 2026</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT260605600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Jun 2026"><span>5 Jun 2026</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT260705600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Jul 2026"><span>5 Jul 2026</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT260805600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Aug 2026"><span>5 Aug 2026</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT260905600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Sep 2026"><span>5 Sep 2026</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT261005600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Oct 2026"><span>5 Oct 2026</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT261105600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Nov 2026"><span>5 Nov 2026</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT261205600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Dec 2026"><span>5 Dec 2026</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT270105600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Jan 2027"><span>5 Jan 2027</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT270205600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Feb 2027"><span>5 Feb 2027</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT270305600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Mar 2027"><span>5 Mar 2027</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT270405600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Apr 2027"><span>5 Apr 2027</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT270505600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 May 2027"><span>5 May 2027</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT270605600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Jun 2027"><span>5 Jun 2027</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT270705600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Jul 2027"><span>5 Jul 2027</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+          <div class="repay-row clickable" data-sheet-open="paymentDetailsSheet" data-pd-ref="PMT270805600" data-pd-amount="SAR 600.00" data-pd-status="Successful" data-pd-channel="Card" data-pd-date="5 Aug 2027"><span>5 Aug 2027</span><span>SAR 600.00</span><span class="badge badge-success">Paid</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet-backdrop layer2" id="paymentDetailsSheet">
+    <div class="sheet-panel">
+      <div class="sheet-handle"></div>
+      <div class="sheet-panel-head"><div class="sheet-title">Payment details</div><button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+      <div class="row"><span class="lbl">Payment reference</span><span class="val" data-pd-field="ref">—</span></div>
+      <div class="row"><span class="lbl">Payment amount</span><span class="val" data-pd-field="amount">—</span></div>
+      <div class="row"><span class="lbl">Payment status</span><span class="val"><span class="badge badge-success" data-pd-field="status">—</span></span></div>
+      <div class="row"><span class="lbl">Payment channel</span><span class="val" data-pd-field="channel">—</span></div>
+      <div class="row" style="border-bottom:none;"><span class="lbl">Payment date</span><span class="val" data-pd-field="date">—</span></div>
+    </div>
+  </div>
+
+  </div>
+  <div class="home-indicator"></div>
+  </div>
+</div>
+<script src="js/app.js"></script>
+</body>
+</html>

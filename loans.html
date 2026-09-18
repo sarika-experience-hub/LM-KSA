@@ -16,18 +16,31 @@
   <div class="page ">
     <div class="app-header"><a class="icon-btn" href="home.html" ><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18" /></svg></a><div class="title">My Loans</div></div>
     <div class="body">
+    <div class="h3" style="margin-top:2px;">Active loans (1)</div>
     <div data-skeleton="1" data-skeleton-type="card">
     <div class="card card-highlight">
-      <div class="row"><span style="font-weight:700;">Personal finance</span><span class="badge badge-success">Disbursed</span></div>
-      <div class="big-amount" style="font-size:22px;margin:8px 0;">SAR 2,180.00</div>
-      <div class="row" style="border:none;padding-top:0;"><span class="small">Disbursed 14 Nov 2025</span><span class="small">Due 14 Dec 2025</span></div>
-      <div class="loan-actions"><a class="btn btn-primary" href="payment-method.html" data-nav ><span class="label">Pay now</span><span class="spinner"></span></a><a class="btn btn-secondary" href="repayment-schedule.html" data-nav ><span class="label">View details</span><span class="spinner"></span></a></div>
+      <div class="row" style="border:none;padding-bottom:2px;"><span style="font-weight:700;">Disbursed amount</span><span class="badge badge-success">Active</span></div>
+      <div class="big-amount" style="font-size:22px;margin:4px 0 2px;">SAR 12,000.00</div>
+      <div class="stat-grid">
+        <div class="stat-cell"><span class="lbl">Outstanding payments</span><span class="val">SAR 13,570.00</span></div>
+        <div class="stat-cell"><span class="lbl">Total repayments</span><span class="val">SAR 590.00</span></div>
+        <div class="stat-cell"><span class="lbl">Next due date</span><span class="val">14 Jan 2026</span></div>
+        <div class="stat-cell"><span class="lbl">Remaining instalments</span><span class="val">23</span></div>
+      </div>
+      <a class="list-item" href="card.html" data-nav style="margin-top:2px;">
+        <div class="icon-circle"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="2" y="5" width="20" height="14" rx="2.5"/><rect x="2" y="9" width="20" height="3" fill-opacity=".35"/></svg></div>
+        <div class="grow"><div class="t1">Disbursed to card ·· 8599</div><div class="t2">SAR 10,442.14 left to spend</div></div>
+        <div class="chev"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></div>
+      </a>
+      <a class="btn btn-primary" href="loan-summary.html" data-nav style="margin-top:2px;"><span class="label">Details</span><span class="spinner"></span></a>
     </div></div>
-    <a class="list-item" href="card.html" data-nav>
-      <div class="icon-circle"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="2" y="5" width="20" height="14" rx="2.5"/><rect x="2" y="9" width="20" height="3" fill-opacity=".35"/></svg></div>
-      <div class="grow"><div class="t1">Disbursed to card ·· 8599</div><div class="t2">SAR 10,442.14 left to spend</div></div>
-      <div class="chev"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></div>
-    </a></div>
+
+    <div class="h3">Inactive loans (1)</div>
+    <div class="card card-highlight">
+      <div class="row" style="border:none;padding-bottom:2px;"><span style="font-weight:700;">Disbursed amount</span><span class="badge badge-neutral">Closed</span></div>
+      <div class="big-amount" style="font-size:22px;margin:4px 0 2px;">SAR 14,400.00</div>
+      <a class="btn btn-secondary" href="loan-summary-closed.html" data-nav style="margin-top:14px;"><span class="label">Details</span><span class="spinner"></span></a>
+    </div></div>
 
     <div class="bottom-nav"><a href="home.html" class=""><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5" /><path d="M6 10v9h5v-5h2v5h5v-9" /></svg><span>Home</span></a><a href="loans.html" class="active"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg><span>My Loans</span></a><a href="card.html" class=""><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9h.01M18 15h.01"/></svg><span>Card</span></a><a href="more.html" class=""><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg><span>More</span></a></div>
   </div>
