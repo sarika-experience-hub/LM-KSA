@@ -22,19 +22,19 @@
     <div class="card">
       <div class="limit-row">
         <div class="limit-head">Daily point of sale limit <span class="limit-info" title="The most you can spend in shops in one day">i</span></div>
-        <div class="limit-val"><span class="cur">SAR</span><span class="num">4,000</span><a class="edit" href="#">Edit</a></div>
+        <div class="limit-val"><span class="cur">SAR</span><span class="num" id="limit-pos">4,000</span><a class="edit" href="#" data-sheet-open="editLimitSheet" data-target="limit-pos" data-pd-label="Daily point of sale limit" data-pd-amount="4000" data-pd-max="4,000">Edit</a></div>
         <div class="limit-bar"><i style="width:6%"></i></div>
         <div class="limit-used">SAR 240.50 used today</div>
       </div>
       <div class="limit-row">
         <div class="limit-head">Daily online purchase limit <span class="limit-info" title="The most you can spend online in one day">i</span></div>
-        <div class="limit-val"><span class="cur">SAR</span><span class="num">4,000</span><a class="edit" href="#">Edit</a></div>
+        <div class="limit-val"><span class="cur">SAR</span><span class="num" id="limit-online">4,000</span><a class="edit" href="#" data-sheet-open="editLimitSheet" data-target="limit-online" data-pd-label="Daily online purchase limit" data-pd-amount="4000" data-pd-max="4,000">Edit</a></div>
         <div class="limit-bar"><i style="width:4%"></i></div>
         <div class="limit-used">SAR 172.50 used today</div>
       </div>
       <div class="limit-row">
         <div class="limit-head">Daily ATM withdrawal limit <span class="limit-info" title="The most cash you can withdraw in one day">i</span></div>
-        <div class="limit-val"><span class="cur">SAR</span><span class="num">5,000</span><a class="edit" href="#">Edit</a></div>
+        <div class="limit-val"><span class="cur">SAR</span><span class="num" id="limit-atm">5,000</span><a class="edit" href="#" data-sheet-open="editLimitSheet" data-target="limit-atm" data-pd-label="Daily ATM withdrawal limit" data-pd-amount="5000" data-pd-max="5,000">Edit</a></div>
         <div class="limit-bar"><i style="width:0%"></i></div>
         <div class="limit-used">Nothing withdrawn today</div>
       </div>
@@ -42,7 +42,20 @@
 
     <div class="hint hint-strong">Limits cap daily spending — they don't add money. You can never spend more than your SAR 10,442.14 card balance.</div>
     <div class="hint">The highest limits are set by Nama and cannot be raised beyond them.</div></div>
-    <div class="footer"><a class="btn btn-primary" href="card.html" data-nav ><span class="label">Update limits</span><span class="spinner"></span></a></div>
+    <div class="footer"><a class="btn btn-secondary" href="card.html" data-nav ><span class="label">Done</span><span class="spinner"></span></a></div>
+
+  <div class="sheet-backdrop" id="editLimitSheet">
+    <div class="sheet-panel">
+      <div class="sheet-handle"></div>
+      <div class="sheet-panel-head"><div class="sheet-title" data-pd-field="label">Edit limit</div><button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+      <div class="field">
+        <input class="input" type="number" inputmode="numeric" data-pd-field="amount" min="0">
+        <label>Amount (SAR)</label>
+      </div>
+      <div class="hint" style="margin:-8px 0 16px;">Maximum SAR <span data-pd-field="max">—</span> — set by Nama. You can only lower this limit, not raise it.</div>
+      <a class="btn btn-primary" href="#" data-limit-save><span class="label">Save</span></a>
+    </div>
+  </div>
 
   </div>
   <div class="home-indicator"></div>

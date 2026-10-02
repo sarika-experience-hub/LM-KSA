@@ -787,6 +787,19 @@ svg[stroke-width="3"]{ stroke-width:2.4; }
 }
 .toast.show{ transform:translateY(0); opacity:1; }
 
+/* ==========================================================================
+   Consent sheet (SIMAH credit-bureau authorization)
+   ========================================================================== */
+.consent-close{
+  position:absolute; top:14px; right:16px; width:32px; height:32px; border:none;
+  background:transparent; box-shadow:none; color:var(--ink); cursor:pointer;
+  display:flex; align-items:center; justify-content:center; z-index:1;
+}
+.consent-close svg{ width:18px; height:18px; }
+.consent-close:active{ opacity:.6; }
+.simah-logo{ display:block; height:52px; width:auto; margin:8px 0 18px; }
+.consent-text{ margin-bottom:0; }
+
 /* bottom sheet used for terms */
 .sheet-overlay{
   position:absolute; inset:0; background:rgba(15,20,25,.02); z-index:5;

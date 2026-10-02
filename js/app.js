@@ -949,19 +949,37 @@ function initLangSwitch(){
 function initPickList(){
   document.querySelectorAll('[data-pick-group]').forEach(group=>{
     const items = group.querySelectorAll('.pick-item');
+    const target = group.getAttribute('data-pick-group');
+    const select = item=>{
+      items.forEach(x=>x.classList.remove('on'));
+      item.classList.add('on');
+      const cta = document.querySelector('[data-pick-cta="'+target+'"]');
+      if(cta){
+        cta.removeAttribute('disabled');
+        const href = item.getAttribute('data-pick-href');
+        if(href) cta.setAttribute('href', href);
+      }
+      const value = item.getAttribute('data-pick-value');
+      if(value) localStorage.setItem('pick:'+target, value);
+    };
     items.forEach(item=>{
-      item.addEventListener('click', ()=>{
-        items.forEach(x=>x.classList.remove('on'));
-        item.classList.add('on');
-        const target = group.getAttribute('data-pick-group');
-        const cta = document.querySelector('[data-pick-cta="'+target+'"]');
-        if(cta){
-          cta.removeAttribute('disabled');
-          const href = item.getAttribute('data-pick-href');
-          if(href) cta.setAttribute('href', href);
-        }
-      });
+      item.addEventListener('click', ()=>select(item));
     });
+    // record whichever item is pre-selected by default on page load, so a
+    // choice made on an earlier visit doesn't leak into this flow if the
+    // user never touches an already-preselected option
+    const preselected = group.querySelector('.pick-item.on');
+    if(preselected) select(preselected);
+  });
+}
+
+/* ---------- routes a CTA's href based on an earlier pick-list choice ---------- */
+function initPickRouting(){
+  document.querySelectorAll('[data-pick-route]').forEach(cta=>{
+    const key = cta.getAttribute('data-pick-route');
+    const routes = JSON.parse(cta.getAttribute('data-pick-route-map') || '{}');
+    const value = localStorage.getItem('pick:'+key);
+    if(value && routes[value]) cta.setAttribute('href', routes[value]);
   });
 }
 
@@ -1040,8 +1058,12 @@ function initSheets(){
       if(!sheet) return;
       sheet.querySelectorAll('[data-pd-field]').forEach(field=>{
         const attr = 'data-pd-' + field.getAttribute('data-pd-field');
-        if(this.hasAttribute(attr)) field.textContent = this.getAttribute(attr);
+        if(this.hasAttribute(attr)){
+          const val = this.getAttribute(attr);
+          if(field.tagName === 'INPUT') field.value = val; else field.textContent = val;
+        }
       });
+      if(this.hasAttribute('data-target')) sheet.setAttribute('data-active-target', this.getAttribute('data-target'));
       sheet.classList.add('open');
     });
   });
@@ -1054,6 +1076,39 @@ function initSheets(){
         e.preventDefault();
         sheet.classList.remove('open');
       });
+    });
+  });
+}
+
+/* ---------- card limits: edit sheet writes the new figure back into the
+   row that opened it, capped at the max Nama allows for that limit ---------- */
+function initLimitEdit(){
+  document.querySelectorAll('[data-sheet-open="editLimitSheet"]').forEach(trigger=>{
+    trigger.addEventListener('click', function(){
+      const sheet = document.getElementById('editLimitSheet');
+      const input = sheet && sheet.querySelector('[data-pd-field="amount"]');
+      const max = this.getAttribute('data-pd-max');
+      if(input && max) input.setAttribute('max', max.replace(/,/g,''));
+    });
+  });
+  document.querySelectorAll('[data-limit-save]').forEach(btn=>{
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      const sheet = this.closest('.sheet-backdrop');
+      if(!sheet) return;
+      const input = sheet.querySelector('[data-pd-field="amount"]');
+      const targetId = sheet.getAttribute('data-active-target');
+      const target = targetId && document.getElementById(targetId);
+      if(input && target){
+        const max = parseFloat(input.getAttribute('max')) || Infinity;
+        let n = parseFloat(input.value);
+        if(!isNaN(n) && n > 0){
+          n = Math.min(n, max);
+          target.textContent = n.toLocaleString('en-US');
+        }
+      }
+      sheet.classList.remove('open');
+      if(typeof showToast === 'function') showToast('Limit updated');
     });
   });
 }
@@ -1107,10 +1162,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
   initAddAccount();
   initLangSwitch();
   initPickList();
+  initPickRouting();
   initBalanceEye();
   initCopyButtons();
   initCardFreeze();
   initRevealTimer();
   initSheets();
+  initLimitEdit();
   updateContinueState();
 });
